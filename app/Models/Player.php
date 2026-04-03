@@ -9,7 +9,7 @@ class Player extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['team_id', 'sport_id', 'name', 'position', 'nationality', 'date_of_birth', 'jersey_number'];
+    protected $fillable = ['api_football_id', 'team_id', 'sport_id', 'name', 'position', 'nationality', 'date_of_birth', 'jersey_number'];
 
     public function team()
     {

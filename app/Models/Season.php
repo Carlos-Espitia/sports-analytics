@@ -9,7 +9,7 @@ class Season extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sport_id', 'name', 'slug', 'start_date', 'end_date'];
+    protected $fillable = ['sport_id', 'api_league_id', 'api_season_year', 'name', 'slug', 'start_date', 'end_date'];
 
     public function sport()
     {

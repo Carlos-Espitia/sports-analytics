@@ -13,7 +13,7 @@ class Fixture extends Model
     protected $table = 'matches';
 
     protected $fillable = [
-        'season_id', 'home_team_id', 'away_team_id',
+        'api_football_id', 'season_id', 'home_team_id', 'away_team_id',
         'match_date', 'status', 'home_score', 'away_score', 'venue',
     ];
 
