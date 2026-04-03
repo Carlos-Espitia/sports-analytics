@@ -1,15 +1,21 @@
 import AppLayout from '@/Layouts/AppLayout';
+import { router } from '@inertiajs/react';
 
-export default function Fixtures({ season, fixtures }) {
+export default function Fixtures({ season, fixtures, seasons }) {
     const finished  = fixtures.filter(f => f.status === 'finished');
     const scheduled = fixtures.filter(f => f.status === 'scheduled');
 
     return (
         <AppLayout>
-        <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl mx-auto">
 
-                <h1 className="text-3xl font-bold text-gray-800 mb-1">Fixtures</h1>
-                <p className="text-gray-500 mb-8">{season.name}</p>
+                <div className="flex items-center justify-between mb-6">
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-800">Fixtures</h1>
+                        <p className="text-gray-500">{season.name}</p>
+                    </div>
+                    <SeasonSelector seasons={seasons} currentSlug={season.slug} type="fixtures" />
+                </div>
 
                 {finished.length > 0 && (
                     <section className="mb-8">
@@ -38,8 +44,26 @@ export default function Fixtures({ season, fixtures }) {
     );
 }
 
+function SeasonSelector({ seasons, currentSlug, type }) {
+    function onChange(e) {
+        router.visit(`/soccer/${type}/${e.target.value}`);
+    }
+
+    return (
+        <select
+            value={currentSlug}
+            onChange={onChange}
+            className="text-sm border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+            {seasons.map(s => (
+                <option key={s.id} value={s.slug}>{s.name}</option>
+            ))}
+        </select>
+    );
+}
+
 function FixtureRow({ fixture }) {
-    const date = new Date(fixture.match_date);
+    const date      = new Date(fixture.match_date);
     const formatted = date.toLocaleDateString('en-GB', {
         day: 'numeric', month: 'short', year: 'numeric'
     });
@@ -49,7 +73,6 @@ function FixtureRow({ fixture }) {
             <div className="flex-1 text-right">
                 <span className="font-semibold text-gray-800">{fixture.home_team.name}</span>
             </div>
-
             <div className="mx-6 text-center min-w-[80px]">
                 {fixture.status === 'finished' ? (
                     <span className="text-xl font-bold text-gray-800">
@@ -59,7 +82,6 @@ function FixtureRow({ fixture }) {
                     <span className="text-sm text-gray-400">{formatted}</span>
                 )}
             </div>
-
             <div className="flex-1 text-left">
                 <span className="font-semibold text-gray-800">{fixture.away_team.name}</span>
             </div>

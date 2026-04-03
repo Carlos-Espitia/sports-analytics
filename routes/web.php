@@ -12,6 +12,6 @@ Route::get('/', function () {
 });
 
 Route::prefix('soccer')->name('soccer.')->group(function () {
-    Route::get('/standings', [StandingsController::class, 'index'])->name('standings');
-    Route::get('/fixtures', [FixturesController::class, 'index'])->name('fixtures');
+    Route::get('/standings/{season}', [StandingsController::class, 'index'])->name('standings');
+    Route::get('/fixtures/{season}', [FixturesController::class, 'index'])->name('fixtures');
 });

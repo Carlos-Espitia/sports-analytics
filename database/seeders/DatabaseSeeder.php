@@ -8,13 +8,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Order matters — each seeder depends on the previous one's data
+        // Only seed the data the sync command needs to know what to fetch.
+        // Teams, fixtures, standings, and stats all come from the API via football:sync.
         $this->call([
             SportSeeder::class,
-            TeamSeeder::class,
             SeasonSeeder::class,
-            FixtureSeeder::class,
-            StandingSeeder::class,
         ]);
     }
 }

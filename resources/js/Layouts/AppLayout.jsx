@@ -8,10 +8,10 @@ export default function AppLayout({ children }) {
                     <Link href="/" className="text-lg font-bold text-gray-800 mr-4">
                         Sports Analytics
                     </Link>
-                    <Link href="/soccer/standings" className="text-sm text-gray-600 hover:text-gray-900">
+                    <Link href="/soccer/standings/premier-league-2024-25" className="text-sm text-gray-600 hover:text-gray-900">
                         Standings
                     </Link>
-                    <Link href="/soccer/fixtures" className="text-sm text-gray-600 hover:text-gray-900">
+                    <Link href="/soccer/fixtures/premier-league-2024-25" className="text-sm text-gray-600 hover:text-gray-900">
                         Fixtures
                     </Link>
                 </div>

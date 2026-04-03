@@ -1,13 +1,18 @@
 import AppLayout from '@/Layouts/AppLayout';
+import { router } from '@inertiajs/react';
 
-export default function Standings({ season, standings }) {
+export default function Standings({ season, standings, seasons }) {
     return (
         <AppLayout>
-        <div className="p-0">
             <div className="max-w-4xl mx-auto">
 
-                <h1 className="text-3xl font-bold text-gray-800 mb-1">Standings</h1>
-                <p className="text-gray-500 mb-6">{season.name}</p>
+                <div className="flex items-center justify-between mb-6">
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-800">Standings</h1>
+                        <p className="text-gray-500">{season.name}</p>
+                    </div>
+                    <SeasonSelector seasons={seasons} currentSlug={season.slug} type="standings" />
+                </div>
 
                 <div className="bg-white rounded-xl shadow overflow-hidden">
                     <table className="w-full text-sm">
@@ -45,7 +50,24 @@ export default function Standings({ season, standings }) {
                 </div>
 
             </div>
-        </div>
         </AppLayout>
+    );
+}
+
+function SeasonSelector({ seasons, currentSlug, type }) {
+    function onChange(e) {
+        router.visit(`/soccer/${type}/${e.target.value}`);
+    }
+
+    return (
+        <select
+            value={currentSlug}
+            onChange={onChange}
+            className="text-sm border border-gray-300 rounded-lg px-3 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+            {seasons.map(s => (
+                <option key={s.id} value={s.slug}>{s.name}</option>
+            ))}
+        </select>
     );
 }
